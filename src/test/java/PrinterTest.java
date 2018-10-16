@@ -15,4 +15,9 @@ public class PrinterTest {
     public void canPrint(){
         assertEquals("printing: Hello World", printer.print("Hello World"));
     }
+
+    @Test
+    public void connect(){
+        assertEquals("Connecting to test network.", printer.connect("test"));
+    }
 }

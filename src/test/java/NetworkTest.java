@@ -27,6 +27,30 @@ public class NetworkTest {
     }
 
     @Test
+    public void getMaxDevices() {
+        assertEquals(10, network.getMaxDevices());
+    }
+
+    @Test
+    public void getFreeSlots() {
+        assertEquals(10, network.freeSlots());
+        network.connect(desktop);
+        assertEquals(9, network.freeSlots());
+    }
+
+    @Test
+    public void cannotAddMoreThanMax() {
+        for (int i = 0; i < 10; i++) {
+            network.connect(desktop);
+        }
+        assertEquals(0, network.freeSlots());
+        assertEquals(10, network.deviceCount());
+        network.connect(printer);
+        assertEquals(0, network.freeSlots());
+        assertEquals(10, network.deviceCount());
+    }
+
+    @Test
     public void canConnectDesktop() {
         network.connect(desktop);
         assertEquals(1, network.deviceCount());
